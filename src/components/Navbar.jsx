@@ -10,8 +10,8 @@ export default function navbar() {
             <Link to="/" className="text-decoration-none text-white me-5">
               <Button variant="light"> Home </Button>
             </Link>
-            <Link to="/admin" className="text-decoration-none text-white">
-              <Button variant="dark"> Admin </Button>
+            <Link to="/favoritos" className="text-decoration-none text-white">
+              <Button variant="dark"> Favoritos </Button>
             </Link>
           </Nav>
         </Navbar.Collapse>
