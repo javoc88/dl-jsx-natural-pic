@@ -1,14 +1,15 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./views/Home/Home";
-import Admin from "./views/Admin/Admin";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
+import Home from "./views/Home";
+import { useContext, useEffect } from "react";
 import { createContext } from "react";
 
 export default function App() {
-  const [publicaciones, setPublicaciones] = useState([]);
+  const API_KEY = "2arMZRqLqedpt0T9aIApYZlw3yhepKtNaDDNyQ4txBDAvlKgCbv4HTkP";
+  const [publicaciones, setPublicaciones] = useContext();
   const GlobalState = createContext({ publicaciones, setPublicaciones });
+  const endpoint = "/fotos.json";
 
   return (
     <>
@@ -18,7 +19,7 @@ export default function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/favoritos" element={<Favoritos />} />
             </Routes>
           </BrowserRouter>
         </GlobalState.Provider>
