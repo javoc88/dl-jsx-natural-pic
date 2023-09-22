@@ -4,9 +4,8 @@ import Galeria from "../components/Galeria"
 export default function Home() {
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-3">
       <div id="Home">
-        <h1>Natural Pic</h1>
         <Galeria />
       </div>
     </Container>

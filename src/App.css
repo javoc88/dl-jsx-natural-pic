@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuggles&family=Poppins:wght@300&display=swap');
+
+
 body {
   margin: 0;
 }
 
 .App {
-  font-family: "Maitree", serif;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
   color: #43a047;
 }

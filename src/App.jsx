@@ -4,28 +4,36 @@ import Navbar from "./components/Navbar";
 import Home from "./views/Home";
 import Favoritos from "./views/Favoritos";
 import NotFound from "./views/NotFound";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ContextAPI } from "./context/ContextAPI";
+import { createClient } from "pexels";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
+  const { SetDataImg, perPage } = useContext(ContextAPI);
   const API_KEY = "2arMZRqLqedpt0T9aIApYZlw3yhepKtNaDDNyQ4txBDAvlKgCbv4HTkP";
-  const { dataImg, setDataImg } = useContext(ContextAPI);
-  const sharedData = { dataImg, setDataImg }
-  const endpoint = "/fotos.json";
+  useEffect(() => {
+    const client = createClient(API_KEY);
+    const query = "Nature";
+    client.photos
+      .search({ query, per_page: perPage })
+      .then((data) => {
+        SetDataImg(data.photos);
+      })
+      .catch();
+  }, [perPage]);
 
   return (
     <>
-      <div className="App text-light">
-        <ContextAPI.Provider value={ sharedData }>
+      <div className="App">
           <BrowserRouter>
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/favoritos" element={<Favoritos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-        </ContextAPI.Provider>
       </div>
     </>
   );

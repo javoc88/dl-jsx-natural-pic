@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Card from "react-bootstrap/Card";
-import { TestImg.json } from "../TestImg";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import { ContextAPI } from "../context/ContextAPI";
 
-export const CardImg = ({ TestImg }) => {
-  const [isLiked, setIsLiked] = useState(TestImg.liked);
-  const handleClick = () => {
-    setIsLiked(!isLiked);
+export const CardImg = ({ datImg, index }) => {
+  const [isLiked, setIsLiked] = useState(datImg.liked);
+  const { dataImg, SetDataImg } = useContext(ContextAPI);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    const chngLiked = dataImg;
+    chngLiked[index].liked = !chngLiked[index].liked;
+    setIsLiked(datImg.liked);
+    SetDataImg(chngLiked);
   };
 
   return (
     <>
-      <Card style={{ width: "18rem" }} onDoubleClick={handleClick}>
-        <Card.Img variant="top" src={TestImg.src.original} alt={TestImg.alt} />
+      <Card border="success" style={{ width: "18rem" }} bg="dark" text="light" onDoubleClick={handleClick}>
+        <Card.Img variant="top" src={datImg.src.tiny} alt={datImg.alt} />
         <Card.Body>
-          <Card.Title>{TestImg.alt}</Card.Title>
-          <Card.Text>{TestImg.photographer}</Card.Text>
+          <Card.Title>{datImg.alt}</Card.Title>
+          <Card.Text>{datImg.photographer}</Card.Text>
           {isLiked ? (
             <IconHeartFilled className="isLiked" onClick={handleClick} />
           ) : (
